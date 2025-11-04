@@ -14,3 +14,4 @@ Die Anwendung wurde **responsiv** gestaltet, sodass sie auf Desktop, Tablet und 
 Eingabefelder werden geprüft und gegen unsichere Eingaben geschützt.
 
 ...
+Test for the Sync
