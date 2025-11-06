@@ -1,0 +1,50 @@
+/* =========================================
+   Autor: Patryk Płonka
+   Datei: style.css
+   Projekt: IPWA01-01 – Kleiderspenden
+   ========================================= */
+
+/* Basis */
+body {
+  background: linear-gradient(135deg, #f8f9fa, #dee2e6);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Header & Navbar */
+header {
+  color: white;
+}
+
+/* Hauptsection */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+/* Titeln und Texte */
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+/* Hauptbutton */
+.btn-primary {
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+}
+
+/* Footer */
+footer {
+  background-color: #0d6efd;
+  color: white;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
