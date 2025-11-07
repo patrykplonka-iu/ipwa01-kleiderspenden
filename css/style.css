@@ -4,7 +4,19 @@
    Projekt: IPWA01-01 – Kleiderspenden
    ========================================= */
 
-/* Basis */
+/* ---------- Farbdefinitionen ---------- */
+/* Layout-Farbe (Navbar, Footer, Headlines) */
+:root {
+  --bs-primary: #a2cbbb;
+  --bs-primary-rgb: 162, 203, 187;
+
+  /* Aktionsfarben für Primary-Buttons */
+  --brand-action:        #e48728;
+  --brand-action-hover:  #c36f21;
+  --brand-action-active: #b3651f;
+}
+
+/* ---------- Basis ---------- */
 body {
   background: linear-gradient(135deg, #f8f9fa, #dee2e6);
   min-height: 100vh;
@@ -13,12 +25,7 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* Header & Navbar */
-header {
-  color: white;
-}
-
-/* Hauptsection */
+/* Hauptbereich */
 main {
   flex: 1;
   display: flex;
@@ -28,23 +35,68 @@ main {
   padding: 2rem 1rem;
 }
 
-/* Titeln und Texte */
+/* ---------- Logo in der Navigation ---------- */
+.logo-img {
+  height: 32px;
+  width: auto;
+  transition: transform 0.1s ease-in-out;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+
+/* ---------- Typografie ---------- */
 h1 {
   font-size: 2rem;
   font-weight: 600;
-  color: #0d6efd;
+  color: var(--bs-primary);
 }
 
-/* Hauptbutton */
+/* ---------- Footer ---------- */
+footer {
+  background-color: var(--bs-primary);
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ---------- Buttons ---------- */
+/* Größe für Primary-Buttons */
 .btn-primary {
   font-size: 1.1rem;
   padding: 0.75rem 2rem;
 }
 
-/* Footer */
-footer {
-  background-color: #0d6efd;
-  color: white;
-  font-size: 0.9rem;
-  line-height: 1.4;
+/* Farb-Overrides für Primary-Buttons über Bootstrap-Variablen */
+.btn-primary {
+  --bs-btn-bg:            var(--brand-action);
+  --bs-btn-border-color:  var(--brand-action);
+  --bs-btn-hover-bg:      var(--brand-action-hover);
+  --bs-btn-hover-border-color: var(--brand-action-hover);
+  --bs-btn-active-bg:     var(--brand-action-active);
+  --bs-btn-active-border-color: var(--brand-action-active);
+  --bs-btn-focus-shadow-rgb: 228, 135, 40;
+}
+
+/* ---------- Kacheln (Tiles) ---------- */
+.tile-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: .75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  transition: transform .08s ease-in-out, box-shadow .08s ease-in-out;
+}
+
+.tile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* ---------- Zugänglichkeit ---------- */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px dashed var(--brand-action);
+  outline-offset: 2px;
 }
