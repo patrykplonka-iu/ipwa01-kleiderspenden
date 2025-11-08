@@ -1,17 +1,48 @@
-# Kleiderspenden-Registrierung
+# Kleiderspenden Registrierung
 
-Fallstudie im Modul **IPWA01-01 – Programmierung von Webanwendungsoberflächen**  
-IU Internationale Hochschule – Bachelor Softwareentwicklung  
+**Fallstudie:** IPWA01-01 – Programmierung von Webanwendungsoberflächen  
+**Hochschule:** IU Internationale Hochschule  
+**Studiengang:** B.Sc. Softwareentwicklung  
+**Autor:** Patryk Płonka  
 
 ---
 
 ## Projektbeschreibung
 
-Dieses Projekt ist Teil der Fallstudie im Modul *Programmierung von Webanwendungsoberflächen (IPWA01-01)*.  
-Ziel war die Entwicklung einer **einfachen Webanwendung**, mit der Bürgerinnen und Bürger ihre **Kleiderspenden** registrieren können – entweder zur **Übergabe an einer Geschäftsstelle** oder zur **Abholung vor Ort**.
+Diese Webanwendung wurde im Rahmen der Fallstudie entwickelt.  
+Ziel ist ein Online-Portal zur Registrierung von Kleiderspenden.  
+Spendende Personen können wählen, ob die Spende an der Geschäftsstelle übergeben oder von einem Sammelfahrzeug abgeholt werden soll.  
+Außerdem kann ein aktuelles Krisengebiet ausgewählt werden, in das die Spende gesendet werden soll.
 
-Die Anwendung wurde **responsiv** gestaltet, sodass sie auf Desktop, Tablet und Smartphone benutzerfreundlich funktioniert.  
-Eingabefelder werden geprüft und gegen unsichere Eingaben geschützt.
+---
 
-...
-Test for the Sync
+## Hauptfunktionen
+
+- Responsives Layout (Desktop, Tablet, Smartphone)  
+- Formular zur Registrierung von Kleiderspenden  
+- Zwei Optionen: Übergabe an der Geschäftsstelle oder Abholung  
+- PLZ-Prüfung (erste zwei Ziffern müssen übereinstimmen)  
+- Bestätigungsseite mit allen Angaben  
+- Sichere Eingabefelder (Schutz vor Code Injection)  
+- Strukturierte Benutzeroberfläche mit Header, Navigation und Footer  
+- Umsetzung mit **HTML5**, **CSS3 (Bootstrap 5)** und **JavaScript**
+
+---
+
+## Bezug zur Aufgabenstellung
+
+Die Anwendung erfüllt die Anforderungen der Fallstudie:
+
+- Titel und Logo vorhanden  
+- Responsives Design  
+- Formular mit Validierung  
+- Auswahlmöglichkeit zwischen Abholung und Übergabe  
+- Bestätigungsseite mit Daten  
+- Schutz vor manipulierten Eingaben  
+
+---
+
+## Lizenz
+
+Dieses Projekt wurde ausschließlich zu Studienzwecken im Rahmen der IU Internationale Hochschule erstellt.  
+Keine kommerzielle Nutzung vorgesehen.
