@@ -2,17 +2,20 @@
    Datei: form-logic.js
    Autor: Patryk Płonka
    Projekt: IPWA01-01 – Kleiderspenden
-   Version: v1.8 (2025-11-08)
-   Beschreibung: Formular-Logik für die Seite "Kleiderspende registrieren"
+   Version: v2.0 (2025-11-08)
+   Beschreibung: Formular-Logik für "Kleiderspende registrieren"
    ========================================= */
 
 (() => {
+  // Formular-Root
   const form = document.getElementById("donationForm");
-  if (!form) return; // Seite ohne Formular
+  if (!form) { console.warn("[form-logic] Kein Formular gefunden."); return; }
 
+  // Geschäftsstellen-PLZ (Demo: Präfixvergleich)
   const OFFICE_ZIP = "15236";
   const OFFICE_PREFIX = OFFICE_ZIP.slice(0, 2);
 
+  // Elemente
   const modeUebergabe = document.getElementById("mode_uebergabe");
   const modeAbholung  = document.getElementById("mode_abholung");
   const addressBlock  = document.getElementById("addressBlock");
@@ -27,6 +30,7 @@
 
   const zipHint = document.getElementById("zipHint");
 
+  // Kurze Meldungen
   const MSG = {
     clothes: "Bitte Kleidung angeben.",
     region:  "Bitte Krisengebiet wählen.",
@@ -39,23 +43,30 @@
     zipOUT:  "PLZ außerhalb des Abholgebiets."
   };
 
-  // Übergabe/Abholung umschalten
+  // Übergabe/Abholung umschalten – robust (entfernt d-none, setzt .show)
   function updateMode() {
-    if (modeAbholung.checked) {
-      addressBlock.classList.add("show");
-    } else {
-      addressBlock.classList.remove("show");
-      setZipHint("");
-    }
+    if (!addressBlock || !modeAbholung) return;
+    const on = !!modeAbholung.checked;
+
+    // Falls irgendwo d-none blieb – sicherheitshalber entfernen
+    addressBlock.classList.remove("d-none");
+
+    // Sanftes Ein-/Ausblenden (CSS steuert die Animation)
+    addressBlock.classList.toggle("show", on);
+
+    // Fallback gegen kollidierende Styles
+    addressBlock.style.display = on ? "block" : "";
+    if (!on) setZipHint(""); // Slot leeren, Höhe bleibt stabil
   }
-  modeUebergabe.addEventListener("change", updateMode);
-  modeAbholung.addEventListener("change", updateMode);
-  updateMode();
+
+  modeUebergabe?.addEventListener("change", updateMode);
+  modeAbholung ?.addEventListener("change", updateMode);
+  updateMode(); // Initialzustand
 
   // Live-PLZ-Hinweis
   zip?.addEventListener("input", () => {
+    if (!modeAbholung?.checked) return setZipHint("");
     const v = (zip.value || "").trim();
-    if (!modeAbholung.checked) return setZipHint("");
 
     if (/^\d{5}$/.test(v)) {
       const near = v.slice(0, 2) === OFFICE_PREFIX;
@@ -67,24 +78,27 @@
     }
   });
 
-  // Submit-Validierung
+  // Submit-Validierung + Weiterleitung zur Bestätigung
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     let valid = true;
 
+    // Alte Fehler entfernen
     form.querySelectorAll(".invalid-feedback").forEach(el => el.remove());
     form.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
 
-    if (!clothes.value.trim()) { showError(clothes, MSG.clothes); valid = false; }
-    if (!region.value)          { showError(region,  MSG.region);  valid = false; }
-    if (!consent.checked)       { showError(consent, MSG.consent); valid = false; }
+    // Pflichtfelder (immer)
+    if (!clothes?.value?.trim()) { showError(clothes, MSG.clothes); valid = false; }
+    if (!region ?.value)         { showError(region,  MSG.region ); valid = false; }
+    if (!consent?.checked)       { showError(consent, MSG.consent); valid = false; }
 
-    if (modeAbholung.checked) {
-      if (!street.value.trim()) { showError(street, MSG.street); valid = false; }
-      if (!hnr.value.trim())    { showError(hnr,   MSG.hnr);    valid = false; }
-      if (!city.value.trim())   { showError(city,  MSG.city);   valid = false; }
+    // Zusatz bei Abholung
+    if (modeAbholung?.checked) {
+      if (!street?.value?.trim()) { showError(street, MSG.street); valid = false; }
+      if (!hnr   ?.value?.trim()) { showError(hnr,   MSG.hnr);    valid = false; }
+      if (!city  ?.value?.trim()) { showError(city,  MSG.city);   valid = false; }
 
-      const v = (zip.value || "").trim();
+      const v = (zip?.value || "").trim();
       if (!/^\d{5}$/.test(v)) {
         showError(zip, MSG.zipReq); valid = false;
       } else {
@@ -93,19 +107,48 @@
       }
     }
 
-    if (!valid) return;
-    alert("Gespeichert.");
+    if (!valid) {
+      console.warn("[submit] nicht gültig – Abbruch");
+      return;
+    }
+
+    // Daten für Bestätigung
+    const payload = {
+      mode: modeAbholung?.checked ? "abholung" : "uebergabe",
+      clothes: (clothes?.value || "").trim(),
+      region:  (region ?.value || "").trim(),
+      address: modeAbholung?.checked ? {
+        street: (street?.value || "").trim(),
+        hnr:    (hnr   ?.value || "").trim(),
+        zip:    (zip   ?.value || "").trim(),
+        city:   (city  ?.value || "").trim()
+      } : null,
+      officeZipPreview: (zipHint?.textContent || "").trim(),
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      sessionStorage.setItem("donationForm", JSON.stringify(payload));
+      console.log("[submit] gespeichert:", payload);
+    } catch (e) {
+      console.error("[submit] sessionStorage fehlgeschlagen:", e);
+    }
+
+    // Weiter zur Bestätigungsseite
+    location.href = "confirm.html";
   });
 
-  // --- Helfer ---
+  /* ---------- Helfer ---------- */
   function showError(input, msg) {
+    if (!input) return;
     input.classList.add("is-invalid");
     const div = document.createElement("div");
     div.className = "invalid-feedback";
     div.textContent = msg;
-    input.parentNode.appendChild(div);
+    (input.parentNode || form).appendChild(div);
   }
 
+  // Hint-Text im reservierten Slot (ohne Layout-Sprung)
   function setZipHint(text, type) {
     if (!zipHint) return;
     zipHint.textContent = text || "";

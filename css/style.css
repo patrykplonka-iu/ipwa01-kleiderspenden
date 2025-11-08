@@ -1,11 +1,10 @@
 /* =========================================
-   Autor: Patryk Płonka
    Datei: style.css
    Projekt: IPWA01-01 – Kleiderspenden
+   Autor: Patryk Płonka
    ========================================= */
 
 /* ---------- Farbdefinitionen ---------- */
-/* Layout-Farbe (Navbar, Footer, Headlines) */
 :root {
   --bs-primary: #a2cbbb;
   --bs-primary-rgb: 162, 203, 187;
@@ -14,9 +13,15 @@
   --brand-action:        #e48728;
   --brand-action-hover:  #c36f21;
   --brand-action-active: #b3651f;
+
+  /* Konsistente Content-Breite für Karten/Forms */
+  --card-max-width: 520px;
+  --logo-max-width: 220px;
 }
 
 /* ---------- Basis ---------- */
+html { overflow-y: scroll; } /* verhindert Breiten-Sprünge bei Scrollbar */
+
 body {
   background: linear-gradient(135deg, #f8f9fa, #dee2e6);
   min-height: 100vh;
@@ -25,27 +30,22 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* Hauptbereich */
+/* Hauptbereich – vertikal zentriert, aber ohne globales text-align */
 main {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   padding: 2rem 1rem;
 }
 
-/* ---------- Logo in der Navigation ---------- */
+/* ---------- Navigation / Logo ---------- */
 .logo-img {
   height: 32px;
   width: auto;
-  transition: transform 0.1s ease-in-out;
+  transition: transform .1s ease-in-out;
 }
-
-.logo-img:hover {
-  transform: scale(1.05);
-}
-
+.logo-img:hover { transform: scale(1.05); }
 
 /* ---------- Typografie ---------- */
 h1 {
@@ -55,22 +55,20 @@ h1 {
 }
 
 /* ---------- Footer ---------- */
-footer {
+footer,
+.footer {
   background-color: var(--bs-primary);
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: .9rem;
   line-height: 1.4;
 }
 
 /* ---------- Buttons ---------- */
-/* Größe für Primary-Buttons */
 .btn-primary {
   font-size: 1.1rem;
-  padding: 0.75rem 2rem;
-}
+  padding: .75rem 2rem;
 
-/* Farb-Overrides für Primary-Buttons über Bootstrap-Variablen */
-.btn-primary {
+  /* Bootstrap-Overrides via CSS Custom Props */
   --bs-btn-bg:            var(--brand-action);
   --bs-btn-border-color:  var(--brand-action);
   --bs-btn-hover-bg:      var(--brand-action-hover);
@@ -88,7 +86,6 @@ footer {
   box-shadow: 0 2px 8px rgba(0,0,0,.04);
   transition: transform .08s ease-in-out, box-shadow .08s ease-in-out;
 }
-
 .tile-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0,0,0,.08);
@@ -100,18 +97,16 @@ button:focus-visible {
   outline: 2px dashed var(--brand-action);
   outline-offset: 2px;
 }
-/* --- Stabile Formular-Karte (konstant, aber responsiv) --- */
+
+/* ---------- Formular-Karte (stabil & responsiv) ---------- */
 .form-card {
-  width: min(92vw, 520px);
-  max-width: 520px;
+  width: min(92vw, var(--card-max-width));
+  max-width: var(--card-max-width);
   margin: 0 auto;
   border-radius: .75rem;
 }
 
-/* --- Immer vertikaler Scrollbalken -> kein Breiten-Sprung --- */
-html { overflow-y: scroll; }
-
-/* --- Platzhalter für dynamische Hinweise (z. B. PLZ) --- */
+/* Platzhalter für dynamische Hinweise (z. B. PLZ) */
 .form-hint-slot {
   min-height: 3.2rem; /* ~2–3 Zeilen reserviert */
   padding-top: .25rem;
@@ -120,7 +115,7 @@ html { overflow-y: scroll; }
 .form-hint-slot.ok   { color: #198754; } /* Success */
 .form-hint-slot.warn { color: #d39e00; } /* Warnung */
 
-/* --- Adressblock weich ein-/ausblenden (statt .d-none) --- */
+/* Adressblock weich ein-/ausblenden (statt .d-none) */
 #addressBlock {
   overflow: hidden;
   max-height: 0;
@@ -132,16 +127,52 @@ html { overflow-y: scroll; }
   opacity: 1;
 }
 
-/* --- Logo-Bild im Infobereich --- */
+/* ---------- Infobereich: Logo + Button ---------- */
+.logo-block { text-align: center; }
+
 .info-logo {
-  max-width: 200px;
+  max-width: var(--logo-max-width);
+  width: 100%;
   height: auto;
-  margin-top: 1rem;
   border-radius: .5rem;
-  opacity: 0.95;
+  opacity: .95;
   transition: transform .2s ease-in-out, opacity .2s;
 }
 .info-logo:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
   opacity: 1;
 }
+
+/* Button exakt so breit wie das Bild */
+.logo-btn {
+  display: inline-block;
+  width: 100%;
+  max-width: var(--logo-max-width);
+}
+
+/* ---------- Druckansicht ---------- */
+@media print {
+  .btn,
+  .d-sm-flex,
+  .d-grid {
+    display: none !important;
+  }
+  body { background: #fff !important; }
+  .card { border: 0; box-shadow: none; }
+}
+
+/* ---------- Bewegungs-Reduktion (A11y) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Bestätigung: etwas kompaktere Datenliste */
+#summary dt { font-weight: 700; color: #6c757d; }
+#summary dd { margin-bottom: .5rem; }
+
+/* Abstand */
+#modeBadge { margin-top: .25rem; }
+

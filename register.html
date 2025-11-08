@@ -18,96 +18,94 @@
 
   <!-- Hauptinhalt -->
   <main class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
 
-      <form id="donationForm" class="card p-3 form-card" novalidate>
-        <h1 class="h3 mb-3">Kleiderspende registrieren</h1>
+        <form id="donationForm" class="card p-3 form-card" novalidate>
+          <h1 class="h3 mb-3">Kleiderspende registrieren</h1>
 
-        <!-- Art der Übergabe -->
-        <fieldset class="mb-3">
-          <legend class="fs-6 mb-1">Art der Übergabe</legend>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="mode" id="mode_uebergabe" value="uebergabe" checked>
-            <label class="form-check-label" for="mode_uebergabe">Übergabe an Geschäftsstelle</label>
+          <!-- Art der Übergabe -->
+          <fieldset class="mb-3">
+            <legend class="fs-6 mb-1">Art der Übergabe</legend>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mode" id="mode_uebergabe" value="uebergabe" checked>
+              <label class="form-check-label" for="mode_uebergabe">Übergabe an Geschäftsstelle</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mode" id="mode_abholung" value="abholung">
+              <label class="form-check-label" for="mode_abholung">Abholung an meiner Adresse</label>
+            </div>
+          </fieldset>
+
+          <!-- Pflichtfelder -->
+          <div class="mb-3">
+            <label for="clothes" class="form-label">Art der Kleidung</label>
+            <input type="text" class="form-control" id="clothes" required placeholder="z. B. Winterjacken, Hosen">
+            <div class="form-text">Kurz beschreiben, was gespendet wird.</div>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="mode" id="mode_abholung" value="abholung">
-            <label class="form-check-label" for="mode_abholung">Abholung an meiner Adresse</label>
+
+          <div class="mb-3">
+            <label for="region" class="form-label">Krisengebiet</label>
+            <select id="region" class="form-select" required>
+              <option value="" selected>Bitte wählen…</option>
+              <option value="ukraine">Ukraine</option>
+              <option value="nahost">Nahost</option>
+              <option value="afrika">Afrika</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
           </div>
-        </fieldset>
 
-        <!-- Pflichtfelder -->
-        <div class="mb-3">
-          <label for="clothes" class="form-label">Art der Kleidung</label>
-          <input type="text" class="form-control" id="clothes" required placeholder="z. B. Winterjacken, Hosen">
-          <div class="form-text">Kurz beschreiben, was gespendet wird.</div>
-        </div>
-
-        <div class="mb-3">
-          <label for="region" class="form-label">Krisengebiet</label>
-          <select id="region" class="form-select" required>
-            <option value="" selected>Bitte wählen…</option>
-            <option value="ukraine">Ukraine</option>
-            <option value="nahost">Nahost</option>
-            <option value="afrika">Afrika</option>
-            <option value="sonstiges">Sonstiges</option>
-          </select>
-        </div>
-
-        <!-- Adresse (sanftes Ein-/Ausblenden per CSS) -->
-        <div id="addressBlock" class="border rounded p-3 mb-3">
-          <div class="row g-2">
-            <div class="col-12 col-md-8">
-              <label for="street" class="form-label">Straße</label>
-              <input type="text" class="form-control" id="street" placeholder="Musterstraße">
-            </div>
-            <div class="col-12 col-md-4">
-              <label for="hnr" class="form-label">Haus-Nr.</label>
-              <input type="text" class="form-control" id="hnr" placeholder="12A">
-            </div>
-            <div class="col-6 col-md-3">
-              <label for="zip" class="form-label">PLZ</label>
-              <input type="text" class="form-control" id="zip" placeholder="12345" inputmode="numeric" pattern="\d{5}">
-              <!-- Fester Slot – verhindert Layout-Sprünge -->
-              <div id="zipHint" class="form-hint-slot small" aria-live="polite"></div>
-            </div>
-            <div class="col-6 col-md-9">
-              <label for="city" class="form-label">Ort</label>
-              <input type="text" class="form-control" id="city" placeholder="Musterstadt">
+          <!-- Adresse (sanftes Ein-/Ausblenden per CSS) -->
+          <div id="addressBlock" class="mb-3">
+            <div class="address-inner border rounded p-3">
+              <div class="row g-2">
+                <div class="col-12 col-md-8">
+                  <label for="street" class="form-label">Straße</label>
+                  <input type="text" class="form-control" id="street" placeholder="Musterstraße">
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="hnr" class="form-label">Haus-Nr.</label>
+                  <input type="text" class="form-control" id="hnr" placeholder="12A">
+                </div>
+                <div class="col-6 col-md-3">
+                  <label for="zip" class="form-label">PLZ</label>
+                  <input type="text" class="form-control" id="zip" placeholder="12345" inputmode="numeric" pattern="\d{5}">
+                  <!-- Fester Slot – verhindert Layout-Sprünge -->
+                  <div id="zipHint" class="form-hint-slot small" aria-live="polite"></div>
+                </div>
+                <div class="col-6 col-md-9">
+                  <label for="city" class="form-label">Ort</label>
+                  <input type="text" class="form-control" id="city" placeholder="Musterstadt">
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Zustimmung -->
-        <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" id="consent" required>
-          <label class="form-check-label" for="consent">Ich stimme den Bedingungen zu (Datenschutz/AGB).</label>
-        </div>
+          <!-- Zustimmung -->
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="consent" required>
+            <label class="form-check-label" for="consent">Ich stimme den Bedingungen zu (Datenschutz/AGB).</label>
+          </div>
 
-        <!-- Aktionen -->
-        <div class="d-grid">
-          <button type="submit" class="btn btn-primary">Absenden</button>
-        </div>
-        <div class="d-grid mt-2">
-          <a href="index.html" class="btn btn-outline-secondary">← Zurück zur Startseite</a>
-        </div>
-      </form>
+          <!-- Aktionen -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Absenden</button>
+          </div>
+          <div class="d-grid mt-2">
+            <a href="index.html" class="btn btn-outline-secondary">← Zurück zur Startseite</a>
+          </div>
+        </form>
 
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 
   <!-- Footer (Partial) -->
   <div data-include="partials/footer.html"></div>
 
   <!-- Skripte -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/include.js"></script>
-  <script src="js/form-logic.js"></script>
-    <!-- temporär - cache -->
-
-  <script src="js/form-logic.js?v=1.9"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/include.js" defer></script>
+  <script src="js/form-logic.js?v=2.0" defer></script>
 </body>
 </html>
