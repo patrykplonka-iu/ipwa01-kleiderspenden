@@ -100,3 +100,34 @@ button:focus-visible {
   outline: 2px dashed var(--brand-action);
   outline-offset: 2px;
 }
+/* --- Stabile Formular-Karte (konstant, aber responsiv) --- */
+.form-card {
+  width: min(92vw, 520px);
+  max-width: 520px;
+  margin: 0 auto;
+  border-radius: .75rem;
+}
+
+/* --- Immer vertikaler Scrollbalken -> kein Breiten-Sprung --- */
+html { overflow-y: scroll; }
+
+/* --- Platzhalter für dynamische Hinweise (z. B. PLZ) --- */
+.form-hint-slot {
+  min-height: 3.2rem; /* ~2–3 Zeilen reserviert */
+  padding-top: .25rem;
+  line-height: 1.2;
+}
+.form-hint-slot.ok   { color: #198754; } /* Success */
+.form-hint-slot.warn { color: #d39e00; } /* Warnung */
+
+/* --- Adressblock weich ein-/ausblenden (statt .d-none) --- */
+#addressBlock {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height .25s ease, opacity .25s ease;
+}
+#addressBlock.show {
+  max-height: 520px; /* ausreichend groß für den ganzen Block */
+  opacity: 1;
+}
