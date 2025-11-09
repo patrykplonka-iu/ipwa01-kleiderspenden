@@ -77,10 +77,30 @@
       setZipHint("");
     }
   });
+  
+  // Eingaben bereinigen (gegen injizierten Code)
+  function sanitizeInput(value) {
+    return value
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;")
+      .trim();
+  }
+
+  function sanitizeFormInputs() {
+    const fields = [clothes, region, street, hnr, city, zip];
+    fields.forEach(f => {
+      if (f && typeof f.value === "string") {
+        f.value = sanitizeInput(f.value);
+      }
+    });
+  }
 
   // Submit-Validierung + Weiterleitung zur Bestätigung
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    sanitizeFormInputs();
     let valid = true;
 
     // Alte Fehler entfernen

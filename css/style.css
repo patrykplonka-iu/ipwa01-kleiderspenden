@@ -152,14 +152,12 @@ button:focus-visible {
 
 /* ---------- Druckansicht ---------- */
 @media print {
-  .btn,
-  .d-sm-flex,
-  .d-grid {
-    display: none !important;
-  }
+  header, nav, footer, .btn, .form-card + .form-card, #timestamp { display: none !important; }
+  .card { box-shadow: none !important; border: none !important; }
+  .container { max-width: 900px !important; }
   body { background: #fff !important; }
-  .card { border: 0; box-shadow: none; }
 }
+
 
 /* ---------- Bewegungs-Reduktion (A11y) ---------- */
 @media (prefers-reduced-motion: reduce) {

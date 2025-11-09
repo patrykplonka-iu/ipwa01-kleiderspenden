@@ -46,3 +46,12 @@ Die Anwendung erfüllt die Anforderungen der Fallstudie:
 
 Dieses Projekt wurde ausschließlich zu Studienzwecken im Rahmen der IU Internationale Hochschule erstellt.  
 Keine kommerzielle Nutzung vorgesehen.
+
+### Datenfluss (Form → Validation → Storage → Confirmation)
+
+1. **Register (HTML/JS)**: Pflichtfelder + Validierung (Bootstrap-Klassen, eigene Logik).
+2. **Nähe-Check**: Live-Hinweis zur PLZ (ersten 2 Ziffern vs. Geschäftsstelle).
+3. **Speicherung**: `sessionStorage.setItem("donationForm", JSON.stringify(data))`.
+4. **Weiterleitung**: `confirm.html`.
+5. **Bestätigung**: `js/confirm.js` liest `donationForm`, normalisiert Schema, rendert Zusammenfassung.
+6. **Print**: Druckansicht via Browser (angepasstes Print-CSS).
