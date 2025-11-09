@@ -58,7 +58,7 @@
           </div>
 
           <!-- Adresse (sanftes Ein-/Ausblenden per CSS) -->
-          <div id="addressBlock" class="mb-3">
+          <div id="addressBlock" class="mb-3 d-none">
             <div class="address-inner border rounded p-3">
               <div class="row g-2">
                 <div class="col-12 col-md-8">
@@ -71,13 +71,20 @@
                 </div>
                 <div class="col-6 col-md-3">
                   <label for="zip" class="form-label">PLZ</label>
-                  <input type="text" class="form-control" id="zip" placeholder="12345" inputmode="numeric" pattern="\d{5}">
-                  <!-- Fester Slot – verhindert Layout-Sprünge -->
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="zip" 
+                    placeholder="12345" 
+                    inputmode="numeric" 
+                    pattern="[0-9]{5}"
+                    aria-describedby="zipHint">
+                 <!-- Fester Slot – verhindert Layout-Sprünge -->
                   <div id="zipHint" class="form-hint-slot small" aria-live="polite"></div>
                 </div>
                 <div class="col-6 col-md-9">
                   <label for="city" class="form-label">Ort</label>
-                  <input type="text" class="form-control" id="city" placeholder="Musterstadt">
+                  <input type="text" class="form-control" id="city" placeholder="Musterstadt" autocomplete="address-level2">
                 </div>
               </div>
             </div>
