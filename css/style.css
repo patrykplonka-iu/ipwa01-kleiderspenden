@@ -35,6 +35,9 @@ main {
   padding: 2rem 1rem;
 }
 
+.reading { hyphens: auto; word-break: normal; }
+
+
 /* Typografie */
 h1 {
   font-size: 2rem;
@@ -178,4 +181,16 @@ button:focus-visible {
 
 .text-brand {
   color: var(--brand-action);
+}
+
+/* Lesbarkeit Textabsatz „Über uns“ */
+.reading{
+  max-width: 68ch;         /* angenehme Lesebreite */
+  text-align: left;        /* linksbündig auf allen Screens */
+  line-height: 1.6;        /* etwas mehr Zeilenabstand */
+  word-break: normal;
+  hyphens: auto;           /* Silbentrennung für DE */
+}
+@media (min-width: 992px){  /* auf Desktop etwas breiter erlaubt */
+  .reading{ max-width: 75ch; }
 }
