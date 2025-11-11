@@ -72,15 +72,25 @@ footer,
   --bs-btn-focus-shadow-rgb:   228, 135, 40;
 }
 
-.btn-outline-secondary {
-  color: #fff;
-  border-color: #ccc;
-  background-color: rgba(255,255,255,0.1);
+/* Sekundärer Button (z. B. "Zurück") */
+.btn-outline-secondary,
+.btn-secondary {
+  color: #495057;
+  border-color: #ced4da;
+  background-color: #fff;
 }
-.btn-outline-secondary:hover {
-  background-color: rgba(255,255,255,0.25);
-  border-color: #bbb;
-  color: #fff;
+
+.btn-outline-secondary:hover,
+.btn-secondary:hover {
+  color: #212529;
+  background-color: #f1f3f5;
+  border-color: #adb5bd;
+}
+
+.btn-outline-secondary:active,
+.btn-secondary:active {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
 }
 
 /* Kacheln */
