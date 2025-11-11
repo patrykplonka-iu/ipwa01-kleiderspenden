@@ -4,24 +4,22 @@
    Autor: Patryk Płonka
    ========================================= */
 
-/* ---------- Farbdefinitionen ---------- */
+/* Farben & Größen */
 :root {
   --bs-primary: #a2cbbb;
   --bs-primary-rgb: 162, 203, 187;
 
-  /* Aktionsfarben für Primary-Buttons */
+  /* Brand-Buttons */
   --brand-action:        #e48728;
   --brand-action-hover:  #c36f21;
   --brand-action-active: #b3651f;
 
-  /* Konsistente Content-Breite für Karten/Forms */
   --card-max-width: 520px;
   --logo-max-width: 220px;
 }
 
-/* ---------- Basis ---------- */
-html { overflow-y: scroll; } /* verhindert Breiten-Sprünge bei Scrollbar */
-
+/* Basislayout */
+html { overflow-y: scroll; }
 body {
   background: linear-gradient(135deg, #f8f9fa, #dee2e6);
   min-height: 100vh;
@@ -29,8 +27,6 @@ body {
   flex-direction: column;
   font-family: "Segoe UI", Arial, sans-serif;
 }
-
-/* Hauptbereich – vertikal zentriert, aber ohne globales text-align */
 main {
   flex: 1;
   display: flex;
@@ -39,7 +35,14 @@ main {
   padding: 2rem 1rem;
 }
 
-/* ---------- Navigation / Logo ---------- */
+/* Typografie */
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--bs-primary);
+}
+
+/* Navigation / Logo */
 .logo-img {
   height: 32px;
   width: auto;
@@ -47,58 +50,77 @@ main {
 }
 .logo-img:hover { transform: scale(1.05); }
 
-/* ---------- Typografie ---------- */
-h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--bs-primary);
-}
-
-/* ---------- Footer ---------- */
+/* Footer */
 footer,
 .footer {
   background-color: var(--bs-primary);
-  color: #ffffff;
+  color: #fff;
   font-size: .9rem;
   line-height: 1.4;
 }
 
-/* ---------- Buttons ---------- */
+/* Buttons – Bootstrap-Overrides per CSS-Variablen */
 .btn-primary {
   font-size: 1.1rem;
   padding: .75rem 2rem;
-
-  /* Bootstrap-Overrides via CSS Custom Props */
-  --bs-btn-bg:            var(--brand-action);
-  --bs-btn-border-color:  var(--brand-action);
-  --bs-btn-hover-bg:      var(--brand-action-hover);
+  --bs-btn-bg:                 var(--brand-action);
+  --bs-btn-border-color:       var(--brand-action);
+  --bs-btn-hover-bg:           var(--brand-action-hover);
   --bs-btn-hover-border-color: var(--brand-action-hover);
-  --bs-btn-active-bg:     var(--brand-action-active);
-  --bs-btn-active-border-color: var(--brand-action-active);
-  --bs-btn-focus-shadow-rgb: 228, 135, 40;
+  --bs-btn-active-bg:          var(--brand-action-active);
+  --bs-btn-active-border-color:var(--brand-action-active);
+  --bs-btn-focus-shadow-rgb:   228, 135, 40;
 }
 
-/* ---------- Kacheln (Tiles) ---------- */
+.btn-outline-secondary {
+  color: #fff;
+  border-color: #ccc;
+  background-color: rgba(255,255,255,0.1);
+}
+.btn-outline-secondary:hover {
+  background-color: rgba(255,255,255,0.25);
+  border-color: #bbb;
+  color: #fff;
+}
+
+/* Kacheln */
 .tile-card {
-  background-color: #ffffff;
+  background: #fff;
   border: 1px solid #e9ecef;
   border-radius: .75rem;
   box-shadow: 0 2px 8px rgba(0,0,0,.04);
-  transition: transform .08s ease-in-out, box-shadow .08s ease-in-out;
+  transition: transform .08s, box-shadow .08s;
 }
 .tile-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0,0,0,.08);
 }
 
-/* ---------- Zugänglichkeit ---------- */
+/* Kachel mit Hintergrundbild + Overlay */
+.text-shadow { text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+.tile-card.bg-cover {
+  position: relative;
+  color: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.tile-card.bg-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 0;
+}
+.tile-card.bg-cover .overlay { position: relative; z-index: 1; }
+
+/* Fokus sichtbar (A11y) */
 a:focus-visible,
 button:focus-visible {
   outline: 2px dashed var(--brand-action);
   outline-offset: 2px;
 }
 
-/* ---------- Formular-Karte (stabil & responsiv) ---------- */
+/* Formularkarten */
 .form-card {
   width: min(92vw, var(--card-max-width));
   max-width: var(--card-max-width);
@@ -106,51 +128,26 @@ button:focus-visible {
   border-radius: .75rem;
 }
 
-/* Platzhalter für dynamische Hinweise (z. B. PLZ) */
-.form-hint-slot {
-  min-height: 3.2rem; /* ~2–3 Zeilen reserviert */
-  padding-top: .25rem;
-  line-height: 1.2;
-}
-.form-hint-slot.ok   { color: #198754; } /* Success */
-.form-hint-slot.warn { color: #d39e00; } /* Warnung */
+/* Platzhalter für Hinweise (z. B. PLZ) */
+.form-hint-slot { min-height: 3.2rem; padding-top: .25rem; line-height: 1.2; }
+.form-hint-slot.ok { color: #198754; }
+.form-hint-slot.warn { color: #d39e00; }
 
-/* Adressblock weich ein-/ausblenden (statt .d-none) */
+/* Adressblock ein-/ausblenden */
 #addressBlock {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   transition: max-height .25s ease, opacity .25s ease;
 }
-#addressBlock.show {
-  max-height: 520px; /* ausreichend groß für den ganzen Block */
-  opacity: 1;
-}
+#addressBlock.show { max-height: 520px; opacity: 1; }
 
-/* ---------- Infobereich: Logo + Button ---------- */
-.logo-block { text-align: center; }
+/* Bestätigung */
+#summary dt { font-weight: 700; color: #6c757d; }
+#summary dd { margin-bottom: .5rem; }
+#modeBadge { margin-top: .25rem; }
 
-.info-logo {
-  max-width: var(--logo-max-width);
-  width: 100%;
-  height: auto;
-  border-radius: .5rem;
-  opacity: .95;
-  transition: transform .2s ease-in-out, opacity .2s;
-}
-.info-logo:hover {
-  transform: scale(1.05);
-  opacity: 1;
-}
-
-/* Button exakt so breit wie das Bild */
-.logo-btn {
-  display: inline-block;
-  width: 100%;
-  max-width: var(--logo-max-width);
-}
-
-/* ---------- Druckansicht ---------- */
+/* Drucken */
 @media print {
   header, nav, footer, .btn, .form-card + .form-card, #timestamp { display: none !important; }
   .card { box-shadow: none !important; border: none !important; }
@@ -158,19 +155,17 @@ button:focus-visible {
   body { background: #fff !important; }
 }
 
-
-/* ---------- Bewegungs-Reduktion (A11y) ---------- */
+/* Weniger Bewegung (A11y) */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-    animation: none !important;
-    scroll-behavior: auto !important;
-  }
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
-/* Bestätigung: etwas kompaktere Datenliste */
-#summary dt { font-weight: 700; color: #6c757d; }
-#summary dd { margin-bottom: .5rem; }
 
-/* Abstand */
-#modeBadge { margin-top: .25rem; }
+/* Statistik-Bereich */
+.impact-section {
+  background: #f9fafb;
+  border-radius: 1rem;
+}
 
+.text-brand {
+  color: var(--brand-action);
+}

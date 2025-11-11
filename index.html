@@ -32,40 +32,71 @@
       <div class="row g-3">
         <!-- Kachel 1 -->
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="tile-card h-100 p-3 d-flex flex-column">
-            <h2 class="h4 mb-2">Spende registrieren</h2>
-            <p class="mb-3 flex-grow-1">Melden Sie Ihre Kleiderspende an, zur Übergabe oder Abholung.</p>
-            <a href="register.html" class="btn btn-primary w-100 mt-auto">Zum Formular</a>
+          <div class="tile-card h-100 p-3 d-flex flex-column bg-cover"
+               style="background-image: url('assets/img/image1.jpg'); background-size: cover; background-position: center;">
+            <div class="overlay p-3 d-flex flex-column flex-grow-1 rounded">
+              <h2 class="h5 mb-2 text-white text-shadow">Über uns</h2>
+              <p class="mb-3 flex-grow-1 text-white-50">Kurz über unsere Organisation und wo wir arbeiten.</p>
+              <a href="infos.html" class="btn btn-primary w-100 mt-auto">Mehr erfahren</a>
+            </div>
           </div>
         </div>
 
         <!-- Kachel 2 -->
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="tile-card h-100 p-3 d-flex flex-column">
-            <h2 class="h5 mb-2">Über uns...</h2>
-            <p class="mb-3 flex-grow-1">Kurz über unsere Organisation und wo wir arbeiten.</p>
-            <a href="infos.html" class="btn btn-primary w-100 mt-auto">Mehr erfahren</a>
+          <div class="tile-card h-100 p-3 d-flex flex-column bg-cover"
+               style="background-image: url('assets/img/image2.jpg'); background-size: cover; background-position: center;">
+            <div class="overlay p-3 d-flex flex-column flex-grow-1 rounded">
+              <h2 class="h5 mb-2 text-white text-shadow">Spende registrieren</h2>
+              <p class="mb-3 flex-grow-1 text-white-50">Melden Sie Ihre Kleiderspende an, zur Übergabe oder Abholung.</p>
+              <a href="register.html" class="btn btn-primary w-100 mt-auto">Zum Formular</a>
+            </div>
           </div>
         </div>
 
         <!-- Kachel 3 -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="tile-card h-100 p-3 d-flex flex-column">
-            <h2 class="h5 mb-2">Kontakt & Standort</h2>
-            <p class="mb-3 flex-grow-1">Fragen? Unsere Geschäftsstelle hilft gern weiter.</p>
-            <a href="#" class="btn btn-outline-secondary w-100 mt-auto" aria-disabled="true">In Arbeit</a>
+<div class="col-12 col-md-6 col-lg-4">
+  <div class="tile-card h-100 p-3 d-flex flex-column bg-cover"
+       style="background-image: url('assets/img/image3.jpg'); background-size: cover; background-position: center;">
+    <div class="overlay p-3 d-flex flex-column flex-grow-1 rounded">
+      <h2 class="h5 mb-2 text-white text-shadow">Kontakt & Standort</h2>
+      <p class="mb-3 flex-grow-1 text-white-50">
+        Fragen? Unsere Geschäftsstelle hilft gern weiter.
+      </p>
+      <a href="#" class="btn btn-outline-secondary w-100 mt-auto" aria-disabled="true">In Arbeit</a>
+    </div>
+  </div>
+</div>
+      </div> <!-- /row -->
+            <!-- Statistiken / Wirkung -->
+      <section class="impact-section text-center py-5 mt-3">
+        <div class="container">
+          <h2 class="h4 mb-4 text-primary">Unsere Wirkung</h2>
+          <div class="row justify-content-center g-4">
+            <div class="col-6 col-md-3">
+              <h3 class="display-6 fw-bold text-brand">103+</h3>
+              <p class="small text-muted">Spenden 2025</p>
+            </div>
+            <div class="col-6 col-md-3">
+              <h3 class="display-6 fw-bold text-brand">13</h3>
+              <p class="small text-muted">Freiwillige</p>
+            </div>
+            <div class="col-6 col-md-3">
+              <h3 class="display-6 fw-bold text-brand">3</h3>
+              <p class="small text-muted">Standorte</p>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </div> <!-- /container -->
   </main>
 
+  
   <!-- Footer (Partial) -->
   <div data-include="partials/footer.html"></div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Include Script -->
   <script src="js/include.js"></script>
 </body>
 </html>
